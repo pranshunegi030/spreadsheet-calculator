@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>View Summary</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <h1>Summary for Company ID: <%= companyId %></h1>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/logout">Logout</a>
+      <div class="dropdown">
+        <button class="dropbtn">Account</button>
+        <div class="dropdown-content">
+          <a href="#">User: <%= user.username %></a>
+        </div>
+      </div>
+    </nav>
+
+    <h2>Capex Items</h2>
+    <% if (capex.length > 0) { %>
+    <table>
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Rate</th>
+          <th>Quantity</th>
+          <th>Year 1</th>
+          <th>Year 2</th>
+          <th>Year 3</th>
+          <th>Year 4</th>
+          <th>Year 5</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% capex.forEach(function(item) { %>
+        <tr>
+          <td><%= item.item %></td>
+          <td><%= item.rate %></td>
+          <td><%= item.quantity %></td>
+          <td><%= item.rate * item.quantity %></td>
+          <td>0</td>
+          <td>0</td>
+          <td>0</td>
+          <td>0</td>
+        </tr>
+        <% }); %>
+        <tr>
+          <td>Capex Total</td>
+          <td></td>
+          <td></td>
+          <td><%= capexTotal.year1 %></td>
+          <td><%= capexTotal.year2 %></td>
+          <td><%= capexTotal.year3 %></td>
+          <td><%= capexTotal.year4 %></td>
+          <td><%= capexTotal.year5 %></td>
+        </tr>
+      </tbody>
+    </table>
+    <% } %>
+
+    <h2>Opex Items</h2>
+    <% if (opex.length > 0) { %>
+    <table>
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Rate</th>
+          <th>Quantity</th>
+          <th>Payment Year</th>
+          <th>Year 1</th>
+          <th>Year 2</th>
+          <th>Year 3</th>
+          <th>Year 4</th>
+          <th>Year 5</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% opex.forEach(function(item) { %>
+        <tr>
+          <td><%= item.item %></td>
+          <td><%= item.rate %></td>
+          <td><%= item.quantity %></td>
+          <td><%= item.payment_year %></td>
+          <td><%= item.year1 %></td>
+          <td><%= item.year2 %></td>
+          <td><%= item.year3 %></td>
+          <td><%= item.year4 %></td>
+          <td><%= item.year5 %></td>
+        </tr>
+        <% }); %>
+        <tr>
+          <td>Opex Total</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td><%= opexTotal.year1 %></td>
+          <td><%= opexTotal.year2 %></td>
+          <td><%= opexTotal.year3 %></td>
+          <td><%= opexTotal.year4 %></td>
+          <td><%= opexTotal.year5 %></td>
+        </tr>
+      </tbody>
+    </table>
+    <% } %>
+
+    <h2>Capex + Opex</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Rate</th>
+          <th>Quantity</th>
+          <th>Year 1</th>
+          <th>Year 2</th>
+          <th>Year 3</th>
+          <th>Year 4</th>
+          <th>Year 5</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Capex + Opex</td>
+          <td></td>
+          <td></td>
+          <td><%= capexTotal.year1 + opexTotal.year1 %></td>
+          <td><%= capexTotal.year2 + opexTotal.year2 %></td>
+          <td><%= capexTotal.year3 + opexTotal.year3 %></td>
+          <td><%= capexTotal.year4 + opexTotal.year4 %></td>
+          <td><%= capexTotal.year5 + opexTotal.year5 %></td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>

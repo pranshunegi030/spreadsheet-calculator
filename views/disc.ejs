@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Provisional Consolidation</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <h1>Provisional Consolidation Solution</h1>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/logout">Logout</a>
+      <div class="dropdown">
+        <button class="dropbtn">Account</button>
+        <div class="dropdown-content">
+          <a href="#">User: <%= user.username %></a>
+        </div>
+      </div>
+    </nav>
+    <form action="/addCompanyDisc" method="POST">
+      <input type="text" name="name" placeholder="Company Name" required />
+      <button type="submit">Add Company</button>
+    </form>
+    <ul>
+      <% companies.forEach(function(company) { %>
+      <li>
+        <a href="/addCaseDisc/<%= company.id %>"><%= company.name %></a>
+      </li>
+      <% }); %>
+    </ul>
+  </body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Edit Capex</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <h1>Edit Capex for Company ID: <%= companyId %>, Case ID: <%= caseId %></h1>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/logout">Logout</a>
+      <div class="dropdown">
+        <button class="dropbtn">Account</button>
+        <div class="dropdown-content">
+          <a href="#">User: <%= user.username %></a>
+        </div>
+      </div>
+    </nav>
+    <form action="/editCapex/<%= capex.id %>" method="POST">
+      <input type="hidden" name="companyId" value="<%= companyId %>" />
+      <input type="hidden" name="caseId" value="<%= caseId %>" />
+      <!-- Include caseId -->
+      <input type="text" name="item" value="<%= capex.item %>" required />
+      <input
+        type="number"
+        name="rate"
+        value="<%= capex.rate %>"
+        min="0"
+        step="0.01"
+        required
+      />
+      <input
+        type="number"
+        name="quantity"
+        value="<%= capex.quantity %>"
+        min="1"
+        required
+      />
+      <button type="submit">Update Capex</button>
+    </form>
+  </body>
+</html>

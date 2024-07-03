@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Home</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+  <!-- Unicons -->
+  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="header">
+    <nav class="nav">
+      <!-- <a href="#" class="nav_logo">CodingLab</a> -->
+      <img src="/images/logo.png" alt="loading...." class="nav_logo">
+      <ul class="nav_items">
+        <li class="nav_item">
+          <a href="/" class="nav_link">Home</a>
+          <a href="https://tech9labs.com/" class="nav_link">About Us</a>
+          <a href="#" class="nav_link">Services</a>
+          <a href="#" class="nav_link">Contact</a>
+        </li>
+      </ul>
+      <button class="button" id="form-open">Login</button>
+    </nav>
+  </header>
+
+  <!-- Home -->
+  <section class="home">
+    <!-- <div class="tag">
+        <h1>It's <span>gym </span>time. Let's go!</h1>
+        <h3>I am ready to <span>help</span> you</h3>
+        </div> -->
+
+    <div class="description">
+      <h1 class="title">
+        <span class="gradient-text">Fortifying System Integration </span> through consulting
+      </h1>
+      <p class="paragraph">
+
+      </p>
+      <!-- <form id="form" autocomplete="off">
+          <input
+                      type="email"
+                      id="email-id"
+                      name="email_address"
+                      aria-label="email adress"
+                      placeholder=""
+                      required
+                      oninput="checkEmpty()" />
+          <button type="submit" class="btn" aria-label="submit">
+          <span>Contact Us</span>
+          <ion-icon name="arrow-forward-outline"></ion-icon>
+          </button>
+          </form> -->
+
+    </div>
+    <div class="home-img">
+      <img class="img_hero" src="/images/2.jpg" alt="hero image">
+    </div>
+
+    <!-- --------------------------------------------------------login form------------------------------------------------ -->
+    <div class="form_container">
+      <i class="uil uil-times form_close"></i>
+      <!-- Login From -->
+      <div class="form login_form">
+        <form action="/login" method="POST">
+          <h2>Login</h2>
+          <div class="input_box">
+            <input type="text" name="username" placeholder="Enter your username" required />
+            <i class="uil uil-envelope-alt email"></i>
+          </div>
+          <div class="input_box">
+            <input type="password" name="password" placeholder="Enter your password" required />
+            <i class="uil uil-lock password"></i>
+            <i class="uil uil-eye-slash pw_hide"></i>
+          </div>
+          <div class="option_field">
+            <!-- <span class="checkbox">
+                <input type="checkbox" id="check" />
+                <label for="check">Remember me</label>
+              </span>
+              <a href="#" class="forgot_pw">Forgot password?</a>
+            </div> -->
+            <button class="button" type="submit">Login Now</button>
+            <!-- <div class="login_signup">
+              Don't have an account? <a href="#" id="signup">Signup</a>
+            </div> -->
+        </form>
+      </div>
+
+      <!-- Signup From -->
+      <div class="form signup_form">
+        <form action="#">
+          <h2>Signup</h2>
+          <div class="input_box">
+            <input type="email" placeholder="Enter your email" required />
+            <i class="uil uil-envelope-alt email"></i>
+          </div>
+          <div class="input_box">
+            <input type="password" placeholder="Create password" required />
+            <i class="uil uil-lock password"></i>
+            <i class="uil uil-eye-slash pw_hide"></i>
+          </div>
+          <div class="input_box">
+            <input type="password" placeholder="Confirm password" required />
+            <i class="uil uil-lock password"></i>
+            <i class="uil uil-eye-slash pw_hide"></i>
+          </div>
+          <button class="button">Signup Now</button>
+          <div class="login_signup">
+            Already have an account? <a href="#" id="login">Login</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <div class="footer">
+    <div class="contain">
+      <div class="col">
+        <h1>Specializations</h1>
+        <ul>
+          <li>IT Infrastrucutre Solutions</li>
+          <li>Cyber Security Solutions</li>
+          <li>IT Infrastrucutre Services</li>
+          <li>Intelligent Networks</li>
+        </ul>
+      </div>
+
+      <div class="col"></div>
+
+      <div class="col">
+        <h1>Practices</h1>
+        <ul>
+          <li>System Integration</li>
+          <li>Storage Practices</li>
+          <li>Cloud Practices</li>
+          <li>Cyber Security Practices</li>
+        </ul>
+      </div>
+
+      <div class="col"></div>
+
+      <div class="col">
+        <h1>Support</h1>
+        <ul>
+          <li>Email Us: marketing@tech9labs.com</li>
+          <li>Call Us: +91(11)41715110</li>
+        </ul>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+    <div class="footer-copyright">
+      <p>Copyright ©</p>
+    </div>
+  </div>
+</body>
+
+<script src="/js/script.js"></script>
+</body>
+
+</html>

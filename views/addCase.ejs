@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Company Dashboard</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <h1>Company Dashboard for Company ID: <%= companyId %></h1>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/logout">Logout</a>
+      <div class="dropdown">
+        <button class="dropbtn">Account</button>
+        <div class="dropdown-content">
+          <a href="#">User: <%= user.username %></a>
+        </div>
+      </div>
+    </nav>
+
+    <h2>Existing Cases</h2>
+    <% if (cases.length > 0) { %> <% cases.forEach(function(caseItem) { %>
+    <button
+      onclick="location.href='/proposedDashboard/<%= companyId %>/<%= caseItem.id %>'"
+    >
+      <%= caseItem.case_name %>
+    </button>
+    <% }); %> <% } else { %>
+    <p>No cases available for this company.</p>
+    <% } %>
+
+    <h2>Add New Case</h2>
+    <form action="/addCase/<%= companyId %>" method="POST">
+      <input type="text" name="caseName" placeholder="Case Name" required />
+      <button type="submit">Add Case</button>
+    </form>
+  </body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Compare Solutions</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <h1>Compare Solutions</h1>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/logout">Logout</a>
+      <div class="dropdown">
+        <button class="dropbtn">Account</button>
+        <div class="dropdown-content">
+          <a href="#">User: <%= user.username %></a>
+        </div>
+      </div>
+    </nav>
+
+    <h2>Select a Company to Compare</h2>
+    <% companies.forEach(function(company) { %>
+    <button onclick="location.href='/compare/<%= company.name %>'">
+      <%= company.name %>
+    </button>
+    <% }); %>
+  </body>
+</html>

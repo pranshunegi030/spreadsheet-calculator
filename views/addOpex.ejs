@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Add Opex</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <h1>Add Opex for Company ID: <%= companyId %>, Case ID: <%= caseId %></h1>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/logout">Logout</a>
+      <div class="dropdown">
+        <button class="dropbtn">Account</button>
+        <div class="dropdown-content">
+          <a href="#">User: <%= user.username %></a>
+        </div>
+      </div>
+    </nav>
+    <form action="/addOpex/<%= companyId %>/<%= caseId %>" method="POST">
+      <input type="text" name="item" placeholder="Item" required />
+      <input
+        type="number"
+        name="rate"
+        placeholder="Rate"
+        min="0"
+        step="0.01"
+        required
+      />
+      <input
+        type="number"
+        name="quantity"
+        placeholder="Quantity"
+        min="0"
+        required
+      />
+      <input
+        type="number"
+        name="payment_year"
+        placeholder="Payment Year"
+        min="0"
+        required
+      />
+      <button type="submit">Add Opex</button>
+    </form>
+    <% if (opex.length > 0) { %>
+    <table>
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Rate</th>
+          <th>Quantity</th>
+          <th>Payment Year</th>
+          <th>Year 1</th>
+          <th>Year 2</th>
+          <th>Year 3</th>
+          <th>Year 4</th>
+          <th>Year 5</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% opex.forEach(function(item) { %>
+        <tr>
+          <td><%= item.item %></td>
+          <td><%= item.rate %></td>
+          <td><%= item.quantity %></td>
+          <td><%= item.payment_year %></td>
+          <td><%= item.year1 %></td>
+          <td><%= item.year2 %></td>
+          <td><%= item.year3 %></td>
+          <td><%= item.year4 %></td>
+          <td><%= item.year5 %></td>
+          <td>
+            <a
+              href="/editOpex/<%= item.id %>?companyId=<%= companyId %>&caseId=<%= caseId %>"
+              >Edit</a
+            >
+
+            <a
+              href="/deleteOpex/<%= item.id %>?companyId=<%= companyId %>&caseId=<%= caseId %>"
+              >Delete</a
+            >
+          </td>
+        </tr>
+        <% }); %>
+        <tr>
+          <td>Opex Total</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td><%= opex.reduce((acc, item) => acc + item.year1, 0) %></td>
+          <td><%= opex.reduce((acc, item) => acc + item.year2, 0) %></td>
+          <td><%= opex.reduce((acc, item) => acc + item.year3, 0) %></td>
+          <td><%= opex.reduce((acc, item) => acc + item.year4, 0) %></td>
+          <td><%= opex.reduce((acc, item) => acc + item.year5, 0) %></td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+    <% } %>
+  </body>
+</html>

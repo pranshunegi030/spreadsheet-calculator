@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Select Case for Company: <%= companyName %></title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <h1>Select Case for Company: <%= companyName %></title>
+  <nav>
+    <a href="/">Home</a>
+    <a href="/logout">Logout</a>
+    <div class="dropdown">
+      <button class="dropbtn">Account</button>
+      <div class="dropdown-content">
+        <a href="#">User: <%= user.username %></a>
+      </div>
+    </div>
+  </nav>
+
+  <h2>Select a Case to Compare</h2>
+  <% cases.forEach(function(caseItem) { %>
+  <button onclick="location.href='/compare/<%= companyName %>/<%= caseItem.case_name %>'">
+    <%= caseItem.case_name %>
+  </button>
+  <% }); %>
+</body>
+</html>
