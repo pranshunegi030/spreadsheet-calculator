@@ -1,26 +1,267 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
   <head>
     <meta charset="UTF-8" />
     <title>Dashboard</title>
-    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="/css/styles.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Raleway:300,400"
+      rel="stylesheet"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Titillium+Web:900"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css"
+    />
+    <link
+      href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@mdi/font@7.4.47/css/materialdesignicons.min.css"
+    />
   </head>
   <body>
-    <h1>Dashboard</h1>
-    <nav>
-      <a href="/">Home</a>
-      <a href="/logout">Logout</a>
-      <div class="dropdown">
-        <button class="dropbtn">Account</button>
-        <div class="dropdown-content">
-          <a href="#">User: <%= user.username %></a>
-        </div>
+    <div class="sidebar close">
+      <div class="logo-details">
+        <i class="bx bx-menu"></i>
+        <span class="logo_name">Dashboard</span>
       </div>
-    </nav>
-    <ul>
-      <li><a href="/provisional">Provisional Consolidation Solution</a></li>
-      <li><a href="/disc">Existing Discrete Solution</a></li>
-      <li><a href="/compare">Compare Solutions</a></li>
-    </ul>
+      <ul class="nav-links">
+        <li>
+          <a href="#" id="home-link">
+            <i class="bx bx-grid-alt"></i>
+            <span class="link_name">Home</span>
+          </a>
+          <ul class="sub-menu blank">
+            <li>
+              <a class="link_name" href="#" id="home-link-sub">Home</a>
+            </li>
+          </ul>
+        </li>
+        <br />
+        <li>
+          <div class="iocn-link">
+            <a href="#">
+              <i class="bx bx-collection"></i>
+              <span class="link_name">Provisional Solution</span>
+            </a>
+            <i class="bx bxs-chevron-down arrow"></i>
+          </div>
+          <ul class="sub-menu">
+            <li><a class="link_name" href="#">Provisional Solution</a></li>
+            <li>
+              <a href="#" class="load-content" data-url="/provCapex"
+                >Add Capex</a
+              >
+            </li>
+            <li>
+              <a href="#" class="load-content" data-url="/provOpex">Add Opex</a>
+            </li>
+            <li>
+              <a href="#" class="load-content" data-url="/provSummary"
+                >Summary</a
+              >
+            </li>
+          </ul>
+        </li>
+        <br />
+        <li>
+          <div class="iocn-link">
+            <a href="#">
+              <i class="bx bx-book-alt"></i>
+              <span class="link_name">Existing Solution</span>
+            </a>
+            <i class="bx bxs-chevron-down arrow"></i>
+          </div>
+          <ul class="sub-menu">
+            <li><a class="link_name" href="#">Existing Solution</a></li>
+            <li>
+              <a href="#" class="load-content" data-url="/discCapex"
+                >Add Capex</a
+              >
+            </li>
+            <li>
+              <a href="#" class="load-content" data-url="/discOpex">Add Opex</a>
+            </li>
+            <li>
+              <a href="#" class="load-content" data-url="/discSummary"
+                >View Summary</a
+              >
+            </li>
+          </ul>
+        </li>
+        <br />
+        <li>
+          <a href="#" id="comparison-link">
+            <i class="bx bx-line-chart"></i>
+            <span class="link_name">Comparison</span>
+          </a>
+          <ul class="sub-menu blank">
+            <li>
+              <a class="link_name" href="#" id="comparison-link-sub"
+                >Comparison</a
+              >
+            </li>
+          </ul>
+        </li>
+        <br />
+        <li>
+          <div class="profile-details">
+            <div class="profile-content">
+              <img src="image/profile.jpg" alt="profileImg" />
+            </div>
+            <div class="name-job">
+              <div class="profile_name">Prem Shahi</div>
+              <div class="job">Web Designer</div>
+            </div>
+            <div class="dropdown">
+              <i class="bx bx-log-out"></i>
+              <div class="dropdown-content">
+                <a href="/">Logout</a>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <section class="home-section">
+      <div class="home-content">
+        <!-- <i class="bx bx-menu"></i> -->
+      </div>
+      <div class="iframe-container">
+        <iframe id="content-frame" src="" frameborder="0"></iframe>
+      </div>
+    </section>
+
+    <script>
+      let arrow = document.querySelectorAll(".arrow");
+      for (var i = 0; i < arrow.length; i++) {
+        arrow[i].addEventListener("click", (e) => {
+          let arrowParent = e.target.parentElement.parentElement; //selecting main parent of arrow
+          arrowParent.classList.toggle("showMenu");
+        });
+      }
+      let sidebar = document.querySelector(".sidebar");
+      let sidebarBtn = document.querySelector(".bx-menu");
+      sidebarBtn.addEventListener("click", () => {
+        sidebar.classList.toggle("close");
+      });
+
+      // Load welc.ejs when the page loads
+      window.onload = function () {
+        document.getElementById("content-frame").src = "/welc";
+      };
+
+      // Event listener for Comparison link
+      document
+        .getElementById("comparison-link")
+        .addEventListener("click", function (e) {
+          e.preventDefault();
+          document.getElementById("content-frame").src = "/compare";
+        });
+
+      // Event listener for Comparison link in sub-menu
+      document
+        .getElementById("comparison-link-sub")
+        .addEventListener("click", function (e) {
+          e.preventDefault();
+          document.getElementById("content-frame").src = "/compare";
+        });
+
+      // Event listener for Home link
+      document
+        .getElementById("home-link")
+        .addEventListener("click", function (e) {
+          e.preventDefault();
+          document.getElementById("content-frame").src = "/welc";
+        });
+
+      // Event listener for Home link in sub-menu
+      document
+        .getElementById("home-link-sub")
+        .addEventListener("click", function (e) {
+          e.preventDefault();
+          document.getElementById("content-frame").src = "/welc";
+        });
+
+      // Event listeners for loading content links
+      document.querySelectorAll(".load-content").forEach((link) => {
+        link.addEventListener("click", function (e) {
+          e.preventDefault();
+          document.getElementById("content-frame").src =
+            e.target.getAttribute("data-url");
+        });
+      });
+
+      // Listen for messages from iframe
+      window.addEventListener("message", function (event) {
+        if (event.data) {
+          if (event.data.action === "loadProvisionalPage") {
+            document.getElementById("content-frame").src = "/provisional";
+          } else if (event.data.action === "loadDiscPage") {
+            document.getElementById("content-frame").src = "/disc";
+          } else if (event.data.action === "loadComparePage") {
+            document.getElementById("content-frame").src = "/compare";
+          }
+        }
+      });
+    </script>
+    <style>
+      .iframe-container {
+        width: calc(100% - 50px); /* Adjust according to the sidebar width */
+        height: 100vh;
+        position: absolute;
+        top: 0;
+        right: 0;
+        overflow: hidden;
+      }
+
+      iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+      }
+
+      .home-section {
+        display: flex;
+        flex-direction: row;
+      }
+
+      .profile-details .dropdown {
+        position: relative;
+        display: inline-block;
+      }
+
+      .profile-details .dropdown-content {
+        display: none;
+        position: absolute;
+        bottom: 100%; /* Show above the profile details */
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+      }
+
+      .profile-details:hover .dropdown-content {
+        display: block;
+      }
+
+      .profile-details .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+      }
+
+      .profile-details .dropdown-content a:hover {
+        background-color: #f1f1f1;
+      }
+    </style>
   </body>
 </html>

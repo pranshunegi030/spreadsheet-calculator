@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Cases for the Company Solutions</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      body {
+        background-color: #f7f9fc;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        height: 100vh;
+      }
+      h1 {
+        margin-bottom: 20px;
+        font-size: 24px;
+        color: #333;
+      }
+      h2 {
+        font-size: 20px;
+        color: #333;
+        margin-bottom: 10px;
+      }
+      form {
+        margin-bottom: 20px;
+      }
+      form input[type="text"] {
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        margin-right: 10px;
+      }
+      form button {
+        padding: 10px 20px;
+        font-size: 16px;
+        border: none;
+        border-radius: 4px;
+        background-color: #007bff;
+        color: white;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+      form button:hover {
+        background-color: #0056b3;
+      }
+      ul {
+        list-style: none;
+        padding: 0;
+        width: 100%;
+        max-width: 600px;
+      }
+      ul li {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        background-color: #fff;
+        margin-bottom: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s;
+      }
+      ul li:hover {
+        transform: translateY(-5px);
+      }
+      ul li a {
+        text-decoration: none;
+        color: #007bff;
+        font-weight: bold;
+      }
+      ul li button {
+        padding: 5px 10px;
+        font-size: 14px;
+        border: none;
+        border-radius: 4px;
+        background-color: #dc3545;
+        color: white;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+      ul li button:hover {
+        background-color: #c82333;
+      }
+      @media (max-width: 600px) {
+        h1 {
+          font-size: 20px;
+        }
+        h2 {
+          font-size: 18px;
+        }
+        form input[type="text"],
+        form button {
+          width: 100%;
+          max-width: 100%;
+        }
+        ul {
+          width: 90%;
+        }
+        ul li {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+        ul li a {
+          margin-bottom: 10px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Cases for <%= companyName %> for Existing Solution Summary</h1>
+
+    <h2>Existing Cases</h2>
+    <% if (cases.length > 0) { %>
+    <ul>
+      <% cases.forEach(function(caseItem) { %>
+      <li>
+        <a href="/viewSummaryDisc/<%= companyId %>/<%= caseItem.id %>">
+          <%= caseItem.case_name %>
+        </a>
+      </li>
+      <% }); %>
+    </ul>
+    <% } %>
+  </body>
+</html>

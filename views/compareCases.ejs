@@ -1,28 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>Select Case for Company: <%= companyName %></title>
-  <link rel="stylesheet" href="/styles.css" />
-</head>
-<body>
-  <h1>Select Case for Company: <%= companyName %></title>
-  <nav>
-    <a href="/">Home</a>
-    <a href="/logout">Logout</a>
-    <div class="dropdown">
-      <button class="dropbtn">Account</button>
-      <div class="dropdown-content">
-        <a href="#">User: <%= user.username %></a>
-      </div>
-    </div>
-  </nav>
-
-  <h2>Select a Case to Compare</h2>
-  <% cases.forEach(function(caseItem) { %>
-  <button onclick="location.href='/compare/<%= companyName %>/<%= caseItem.case_name %>'">
-    <%= caseItem.case_name %>
-  </button>
-  <% }); %>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Select Case for Company: <%= companyName %></title>
+    <link rel="stylesheet" href="/styles.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      body {
+        background-color: #f7f9fc;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        height: 100vh;
+      }
+      h1 {
+        margin-bottom: 20px;
+        font-size: 24px;
+        color: #333;
+      }
+      h2 {
+        font-size: 20px;
+        color: #333;
+        margin-bottom: 10px;
+      }
+      ul {
+        list-style: none;
+        padding: 0;
+        width: 100%;
+        max-width: 600px;
+      }
+      ul li {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        background-color: #fff;
+        margin-bottom: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s;
+      }
+      ul li:hover {
+        transform: translateY(-5px);
+      }
+      ul li a {
+        text-decoration: none;
+        color: #007bff;
+        font-weight: bold;
+      }
+      ul li button {
+        padding: 5px 10px;
+        font-size: 14px;
+        border: none;
+        border-radius: 4px;
+        background-color: #007bff;
+        color: white;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+      ul li button:hover {
+        background-color: #0056b3;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Select Case for Company: <%= companyName %></h1>
+    <h2>Select a Case to Compare</h2>
+    <ul>
+      <% cases.forEach(function(caseItem) { %>
+      <li>
+        <a href="/compare/<%= companyName %>/<%= caseItem.case_name %>">
+          <%= caseItem.case_name %>
+        </a>
+        <button
+          onclick="location.href='/compare/<%= companyName %>/<%= caseItem.case_name %>'"
+        >
+          Compare
+        </button>
+      </li>
+      <% }); %>
+    </ul>
+  </body>
 </html>

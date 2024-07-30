@@ -4,21 +4,93 @@
     <meta charset="UTF-8" />
     <title>Compare Summary for Company: <%= companyName %></title>
     <link rel="stylesheet" href="/styles.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      body {
+        background-color: #f7f9fc;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+      }
+      h1 {
+        margin-bottom: 20px;
+        font-size: 24px;
+        color: #333;
+        text-align: center;
+      }
+      table {
+        width: 100%;
+        max-width: 900px;
+        border-collapse: collapse;
+        background-color: #fff;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+      }
+      th,
+      td {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid #ccc;
+      }
+      th {
+        background-color: #007bff;
+        color: white;
+      }
+      tbody tr:nth-child(even) {
+        background-color: #f7f9fc;
+      }
+      button {
+        background-color: #007bff;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        margin-bottom: 20px;
+      }
+      button:hover {
+        background-color: #0056b3;
+      }
+      @media (max-width: 600px) {
+        th,
+        td {
+          font-size: 14px;
+        }
+        table {
+          width: 100%;
+        }
+        th,
+        td {
+          padding: 8px;
+        }
+      }
+      @media (max-width: 400px) {
+        h1 {
+          font-size: 20px;
+        }
+        th,
+        td {
+          font-size: 12px;
+        }
+      }
+    </style>
   </head>
-  <body>
+  <body class="tabBody">
     <h1>Compare Summary for Company: <%= companyName %></h1>
-    <nav>
-      <a href="/">Home</a>
-      <a href="/logout">Logout</a>
-      <div class="dropdown">
-        <button class="dropbtn">Account</button>
-        <div class="dropdown-content">
-          <a href="#">User: <%= user.username %></a>
-        </div>
-      </div>
-    </nav>
+    <button
+      onclick="window.location.href='/downloadExcel/<%= companyName %>/<%= caseName %>'"
+    >
+      Download Excel
+    </button>
 
-    <h2>Capex Items</h2>
+    <h2 class="jump">Capex Items</h2>
     <% if (capex.length > 0) { %>
     <table>
       <thead>
@@ -37,9 +109,9 @@
         <% capex.forEach(function(item) { %>
         <tr>
           <td><%= item.item %></td>
-          <td><%= item.rate %></td>
-          <td><%= item.quantity %></td>
-          <td><%= item.rate * item.quantity %></td>
+          <td><%= Number(item.rate).toLocaleString() %></td>
+          <td><%= Number(item.quantity).toLocaleString() %></td>
+          <td><%= (item.rate * item.quantity).toLocaleString() %></td>
           <td>0</td>
           <td>0</td>
           <td>0</td>
@@ -50,17 +122,17 @@
           <td>Capex Total</td>
           <td></td>
           <td></td>
-          <td><%= capexTotal.year1 %></td>
-          <td><%= capexTotal.year2 %></td>
-          <td><%= capexTotal.year3 %></td>
-          <td><%= capexTotal.year4 %></td>
-          <td><%= capexTotal.year5 %></td>
+          <td><%= capexTotal.year1.toLocaleString() %></td>
+          <td><%= capexTotal.year2.toLocaleString() %></td>
+          <td><%= capexTotal.year3.toLocaleString() %></td>
+          <td><%= capexTotal.year4.toLocaleString() %></td>
+          <td><%= capexTotal.year5.toLocaleString() %></td>
         </tr>
       </tbody>
     </table>
     <% } %>
 
-    <h2>Opex Items</h2>
+    <h2 class="jump">Opex Items</h2>
     <% if (opex.length > 0) { %>
     <table>
       <thead>
@@ -80,14 +152,14 @@
         <% opex.forEach(function(item) { %>
         <tr>
           <td><%= item.item %></td>
-          <td><%= item.rate %></td>
-          <td><%= item.quantity %></td>
+          <td><%= Number(item.rate).toLocaleString() %></td>
+          <td><%= Number(item.quantity).toLocaleString() %></td>
           <td><%= item.payment_year %></td>
-          <td><%= item.year1 %></td>
-          <td><%= item.year2 %></td>
-          <td><%= item.year3 %></td>
-          <td><%= item.year4 %></td>
-          <td><%= item.year5 %></td>
+          <td><%= item.year1.toLocaleString() %></td>
+          <td><%= item.year2.toLocaleString() %></td>
+          <td><%= item.year3.toLocaleString() %></td>
+          <td><%= item.year4.toLocaleString() %></td>
+          <td><%= item.year5.toLocaleString() %></td>
         </tr>
         <% }); %>
         <tr>
@@ -95,17 +167,17 @@
           <td></td>
           <td></td>
           <td></td>
-          <td><%= opexTotal.year1 %></td>
-          <td><%= opexTotal.year2 %></td>
-          <td><%= opexTotal.year3 %></td>
-          <td><%= opexTotal.year4 %></td>
-          <td><%= opexTotal.year5 %></td>
+          <td><%= opexTotal.year1.toLocaleString() %></td>
+          <td><%= opexTotal.year2.toLocaleString() %></td>
+          <td><%= opexTotal.year3.toLocaleString() %></td>
+          <td><%= opexTotal.year4.toLocaleString() %></td>
+          <td><%= opexTotal.year5.toLocaleString() %></td>
         </tr>
       </tbody>
     </table>
     <% } %>
 
-    <h2>Capex + Opex</h2>
+    <h2 class="jump">Capex + Opex</h2>
     <table>
       <thead>
         <tr>
@@ -124,16 +196,16 @@
           <td>Capex + Opex</td>
           <td></td>
           <td></td>
-          <td><%= capexTotal.year1 + opexTotal.year1 %></td>
-          <td><%= capexTotal.year2 + opexTotal.year2 %></td>
-          <td><%= capexTotal.year3 + opexTotal.year3 %></td>
-          <td><%= capexTotal.year4 + opexTotal.year4 %></td>
-          <td><%= capexTotal.year5 + opexTotal.year5 %></td>
+          <td><%= (capexTotal.year1 + opexTotal.year1).toLocaleString() %></td>
+          <td><%= (capexTotal.year2 + opexTotal.year2).toLocaleString() %></td>
+          <td><%= (capexTotal.year3 + opexTotal.year3).toLocaleString() %></td>
+          <td><%= (capexTotal.year4 + opexTotal.year4).toLocaleString() %></td>
+          <td><%= (capexTotal.year5 + opexTotal.year5).toLocaleString() %></td>
         </tr>
       </tbody>
     </table>
 
-    <h2>Disc Capex Items</h2>
+    <h2 class="jump">Disc Capex Items</h2>
     <% if (capexDisc.length > 0) { %>
     <table>
       <thead>
@@ -152,9 +224,9 @@
         <% capexDisc.forEach(function(item) { %>
         <tr>
           <td><%= item.item %></td>
-          <td><%= item.rate %></td>
-          <td><%= item.quantity %></td>
-          <td><%= item.rate * item.quantity %></td>
+          <td><%= Number(item.rate).toLocaleString() %></td>
+          <td><%= Number(item.quantity).toLocaleString() %></td>
+          <td><%= (item.rate * item.quantity).toLocaleString() %></td>
           <td>0</td>
           <td>0</td>
           <td>0</td>
@@ -165,17 +237,17 @@
           <td>Disc Capex Total</td>
           <td></td>
           <td></td>
-          <td><%= capexDiscTotal.year1 %></td>
-          <td><%= capexDiscTotal.year2 %></td>
-          <td><%= capexDiscTotal.year3 %></td>
-          <td><%= capexDiscTotal.year4 %></td>
-          <td><%= capexDiscTotal.year5 %></td>
+          <td><%= capexDiscTotal.year1.toLocaleString() %></td>
+          <td><%= capexDiscTotal.year2.toLocaleString() %></td>
+          <td><%= capexDiscTotal.year3.toLocaleString() %></td>
+          <td><%= capexDiscTotal.year4.toLocaleString() %></td>
+          <td><%= capexDiscTotal.year5.toLocaleString() %></td>
         </tr>
       </tbody>
     </table>
     <% } %>
 
-    <h2>Disc Opex Items</h2>
+    <h2 class="jump">Disc Opex Items</h2>
     <% if (opexDisc.length > 0) { %>
     <table>
       <thead>
@@ -195,14 +267,14 @@
         <% opexDisc.forEach(function(item) { %>
         <tr>
           <td><%= item.item %></td>
-          <td><%= item.rate %></td>
-          <td><%= item.quantity %></td>
+          <td><%= Number(item.rate).toLocaleString() %></td>
+          <td><%= Number(item.quantity).toLocaleString() %></td>
           <td><%= item.payment_year %></td>
-          <td><%= item.year1 %></td>
-          <td><%= item.year2 %></td>
-          <td><%= item.year3 %></td>
-          <td><%= item.year4 %></td>
-          <td><%= item.year5 %></td>
+          <td><%= item.year1.toLocaleString() %></td>
+          <td><%= item.year2.toLocaleString() %></td>
+          <td><%= item.year3.toLocaleString() %></td>
+          <td><%= item.year4.toLocaleString() %></td>
+          <td><%= item.year5.toLocaleString() %></td>
         </tr>
         <% }); %>
         <tr>
@@ -210,17 +282,17 @@
           <td></td>
           <td></td>
           <td></td>
-          <td><%= opexDiscTotal.year1 %></td>
-          <td><%= opexDiscTotal.year2 %></td>
-          <td><%= opexDiscTotal.year3 %></td>
-          <td><%= opexDiscTotal.year4 %></td>
-          <td><%= opexDiscTotal.year5 %></td>
+          <td><%= opexDiscTotal.year1.toLocaleString() %></td>
+          <td><%= opexDiscTotal.year2.toLocaleString() %></td>
+          <td><%= opexDiscTotal.year3.toLocaleString() %></td>
+          <td><%= opexDiscTotal.year4.toLocaleString() %></td>
+          <td><%= opexDiscTotal.year5.toLocaleString() %></td>
         </tr>
       </tbody>
     </table>
     <% } %>
 
-    <h2>Disc Capex + Disc Opex</h2>
+    <h2 class="jump">Disc Capex + Opex</h2>
     <table>
       <thead>
         <tr>
@@ -236,25 +308,33 @@
       </thead>
       <tbody>
         <tr>
-          <td>Disc Capex + Disc Opex</td>
+          <td>Disc Capex + Opex</td>
           <td></td>
           <td></td>
-          <td><%= capexDiscTotal.year1 + opexDiscTotal.year1 %></td>
-          <td><%= capexDiscTotal.year2 + opexDiscTotal.year2 %></td>
-          <td><%= capexDiscTotal.year3 + opexDiscTotal.year3 %></td>
-          <td><%= capexDiscTotal.year4 + opexDiscTotal.year4 %></td>
-          <td><%= capexDiscTotal.year5 + opexDiscTotal.year5 %></td>
+          <td>
+            <%= (capexDiscTotal.year1 + opexDiscTotal.year1).toLocaleString() %>
+          </td>
+          <td>
+            <%= (capexDiscTotal.year2 + opexDiscTotal.year2).toLocaleString() %>
+          </td>
+          <td>
+            <%= (capexDiscTotal.year3 + opexDiscTotal.year3).toLocaleString() %>
+          </td>
+          <td>
+            <%= (capexDiscTotal.year4 + opexDiscTotal.year4).toLocaleString() %>
+          </td>
+          <td>
+            <%= (capexDiscTotal.year5 + opexDiscTotal.year5).toLocaleString() %>
+          </td>
         </tr>
       </tbody>
     </table>
 
-    <h2>Difference</h2>
+    <h2 class="jump">Difference</h2>
     <table>
       <thead>
         <tr>
           <th>Item</th>
-          <th>Rate</th>
-          <th>Quantity</th>
           <th>Year 1</th>
           <th>Year 2</th>
           <th>Year 3</th>
@@ -264,37 +344,36 @@
       </thead>
       <tbody>
         <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <% const diffColors = [ (capexDiscTotal.year1 + opexDiscTotal.year1)
-          >= (capexTotal.year1 + opexTotal.year1) ? 'green' : 'red',
-          (capexDiscTotal.year2 + opexDiscTotal.year2) >= (capexTotal.year2 +
-          opexTotal.year2) ? 'green' : 'red', (capexDiscTotal.year3 +
-          opexDiscTotal.year3) >= (capexTotal.year3 + opexTotal.year3) ? 'green'
-          : 'red', (capexDiscTotal.year4 + opexDiscTotal.year4) >=
-          (capexTotal.year4 + opexTotal.year4) ? 'green' : 'red',
-          (capexDiscTotal.year5 + opexDiscTotal.year5) >= (capexTotal.year5 +
-          opexTotal.year5) ? 'green' : 'red' ]; %>
-          <td style="background-color: <%= diffColors[0] %>">
-            <%= Math.abs((capexDiscTotal.year1 + opexDiscTotal.year1) -
-            (capexTotal.year1 + opexTotal.year1)) %>
+          <td>Difference (Capex + Opex) - (Disc Capex + Disc Opex)</td>
+          <td
+            style="background-color: <%= (capexTotal.year1 + opexTotal.year1) - (capexDiscTotal.year1 + opexDiscTotal.year1) > 0 ? '#ffcccc' : '#ccffcc' %>;"
+          >
+            <%= Math.abs((capexTotal.year1 + opexTotal.year1) -
+            (capexDiscTotal.year1 + opexDiscTotal.year1)).toLocaleString() %>
           </td>
-          <td style="background-color: <%= diffColors[1] %>">
-            <%= Math.abs((capexDiscTotal.year2 + opexDiscTotal.year2) -
-            (capexTotal.year2 + opexTotal.year2)) %>
+          <td
+            style="background-color: <%= (capexTotal.year2 + opexTotal.year2) - (capexDiscTotal.year2 + opexDiscTotal.year2) > 0 ? '#ffcccc' : '#ccffcc' %>;"
+          >
+            <%= Math.abs((capexTotal.year2 + opexTotal.year2) -
+            (capexDiscTotal.year2 + opexDiscTotal.year2)).toLocaleString() %>
           </td>
-          <td style="background-color: <%= diffColors[2] %>">
-            <%= Math.abs((capexDiscTotal.year3 + opexDiscTotal.year3) -
-            (capexTotal.year3 + opexTotal.year3)) %>
+          <td
+            style="background-color: <%= (capexTotal.year3 + opexTotal.year3) - (capexDiscTotal.year3 + opexDiscTotal.year3) > 0 ? '#ffcccc' : '#ccffcc' %>;"
+          >
+            <%= Math.abs((capexTotal.year3 + opexTotal.year3) -
+            (capexDiscTotal.year3 + opexDiscTotal.year3)).toLocaleString() %>
           </td>
-          <td style="background-color: <%= diffColors[3] %>">
-            <%= Math.abs((capexDiscTotal.year4 + opexDiscTotal.year4) -
-            (capexTotal.year4 + opexTotal.year4)) %>
+          <td
+            style="background-color: <%= (capexTotal.year4 + opexTotal.year4) - (capexDiscTotal.year4 + opexDiscTotal.year4) > 0 ? '#ffcccc' : '#ccffcc' %>;"
+          >
+            <%= Math.abs((capexTotal.year4 + opexTotal.year4) -
+            (capexDiscTotal.year4 + opexDiscTotal.year4)).toLocaleString() %>
           </td>
-          <td style="background-color: <%= diffColors[4] %>">
-            <%= Math.abs((capexDiscTotal.year5 + opexDiscTotal.year5) -
-            (capexTotal.year5 + opexTotal.year5)) %>
+          <td
+            style="background-color: <%= (capexTotal.year5 + opexTotal.year5) - (capexDiscTotal.year5 + opexDiscTotal.year5) > 0 ? '#ffcccc' : '#ccffcc' %>;"
+          >
+            <%= Math.abs((capexTotal.year5 + opexTotal.year5) -
+            (capexDiscTotal.year5 + opexDiscTotal.year5)).toLocaleString() %>
           </td>
         </tr>
       </tbody>

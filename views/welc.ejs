@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tech9 Welcome Page</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+      }
+
+      .job-list {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 0 20px;
+      }
+
+      .job-item {
+        display: flex;
+        align-items: flex-start;
+        background-color: #fff;
+        padding: 20px;
+        margin-bottom: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease-in-out;
+      }
+
+      .job-item:hover {
+        transform: scale(1.02);
+      }
+
+      .job-logo img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        margin-right: 20px;
+      }
+
+      .job-details {
+        flex: 1;
+      }
+
+      .job-title {
+        font-size: 18px;
+        font-weight: bold;
+        margin: 0 0 5px 0;
+      }
+
+      .job-company {
+        font-size: 14px;
+        color: #888;
+        margin: 0 0 10px 0;
+      }
+
+      .job-description {
+        font-size: 14px;
+        color: #444;
+        margin: 0 0 10px 0;
+      }
+
+      .job-date {
+        font-size: 12px;
+        color: #888;
+        margin: 0 0 10px 0;
+      }
+
+      .job-type {
+        display: inline-block;
+        background-color: #ff7675;
+        color: #fff;
+        padding: 5px 10px;
+        border: none;
+        border-radius: 12px;
+        font-size: 12px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+      }
+
+      .job-type:hover {
+        transform: scale(1.05);
+      }
+
+      /* Responsive Styles */
+      @media (max-width: 768px) {
+        .job-item {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .job-logo {
+          margin-bottom: 10px;
+        }
+
+        .job-logo img {
+          width: 40px;
+          height: 40px;
+        }
+
+        .job-title {
+          font-size: 16px;
+        }
+
+        .job-company,
+        .job-description,
+        .job-date {
+          font-size: 13px;
+        }
+
+        .job-type {
+          font-size: 11px;
+          padding: 4px 8px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .job-item {
+          padding: 15px;
+        }
+
+        .job-title {
+          font-size: 14px;
+        }
+
+        .job-company,
+        .job-description,
+        .job-date {
+          font-size: 12px;
+        }
+
+        .job-type {
+          font-size: 10px;
+          padding: 3px 6px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="job-list">
+      <div class="job-item">
+        <div class="job-logo">
+          <img src="/images/bg3.jpg" alt="LEK Logo" />
+        </div>
+        <div class="job-details">
+          <h2 class="job-title">Proposed Consolidated Solution</h2>
+          <!-- <p class="job-company">L.E.K. Capability Network</p>
+          <p class="job-description">
+            L.E.K. Consulting is a strategy-focused consulting firm which...
+          </p> -->
+          <button class="job-type" id="proposed-solution-btn">
+            Click Here
+          </button>
+        </div>
+      </div>
+      <div class="job-item">
+        <div class="job-logo">
+          <img src="/images/bg4.jpg" alt="Google Logo" />
+        </div>
+        <div class="job-details">
+          <h2 class="job-title">Existing Discrete Solution</h2>
+          <!-- <p class="job-company">Google</p>
+          <p class="job-description">Attached</p> -->
+          <button class="job-type" id="existing-solution-btn">
+            Click Here
+          </button>
+        </div>
+      </div>
+      <div class="job-item">
+        <div class="job-logo">
+          <img src="/images/bg5.jpg" alt="Siemens Logo" />
+        </div>
+        <div class="job-details">
+          <h2 class="job-title">Compare The Solution</h2>
+          <!-- <p class="job-company">Siemens EDA</p>
+          <p class="job-description">
+            For Software Role Eligible Branches : B.tech CSE, IT, ECE...
+          </p> -->
+          <button class="job-type" id="compare-solution-btn">Click Here</button>
+        </div>
+      </div>
+    </div>
+    <script>
+      document
+        .getElementById("proposed-solution-btn")
+        .addEventListener("click", function () {
+          window.parent.postMessage({ action: "loadProvisionalPage" }, "*");
+        });
+      document
+        .getElementById("existing-solution-btn")
+        .addEventListener("click", function () {
+          window.parent.postMessage({ action: "loadDiscPage" }, "*");
+        });
+      document
+        .getElementById("compare-solution-btn")
+        .addEventListener("click", function () {
+          window.parent.postMessage({ action: "loadComparePage" }, "*");
+        });
+    </script>
+  </body>
+</html>

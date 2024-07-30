@@ -2,149 +2,95 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Existing Discrete Solution Dashboard</title>
+    <title>Proposed Solution Dashboard</title>
     <link rel="stylesheet" href="/styles.css" />
+    <style>
+      body {
+        background-color: #f7f9fc;
+        font-family: Arial, sans-serif;
+      }
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        text-align: center;
+      }
+      h1 {
+        margin-bottom: 20px;
+        font-size: 24px;
+        color: #333;
+      }
+      .button-row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+      }
+      .button-card {
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        transition: transform 0.2s;
+        flex: 1;
+        margin: 0 10px;
+      }
+      .button-card a {
+        text-decoration: none;
+        color: #007bff;
+        font-weight: bold;
+        display: block;
+      }
+      .button-card:hover {
+        transform: translateY(-5px);
+      }
+
+      /* Responsive Styles */
+      @media (max-width: 768px) {
+        h1 {
+          font-size: 20px;
+        }
+        .button-card {
+          padding: 15px;
+          margin: 10px 0;
+        }
+        .button-card a {
+          font-size: 16px;
+        }
+        .button-row {
+          flex-direction: column;
+        }
+      }
+
+      @media (max-width: 480px) {
+        h1 {
+          font-size: 18px;
+        }
+        .button-card {
+          padding: 10px;
+          margin: 8px 0;
+        }
+        .button-card a {
+          font-size: 14px;
+        }
+      }
+    </style>
   </head>
   <body>
-    <h1>
-      Existing Discrete Solution Dashboard for Company ID: <%= companyId %>,
-      Case ID: <%= caseId %>
-    </h1>
-    <nav>
-      <a href="/">Home</a>
-      <a href="/logout">Logout</a>
-      <div class="dropdown">
-        <button class="dropbtn">Account</button>
-        <div class="dropdown-content">
-          <a href="#">User: <%= user.username %></a>
+    <div class="container">
+      <h1>
+        Proposed Solution Dashboard for <%= companyName %>, <%= caseName %>
+      </h1>
+      <div class="button-row">
+        <div class="button-card">
+          <a href="/addCapex/<%= companyId %>/<%= caseId %>">Add Capex</a>
+        </div>
+        <div class="button-card">
+          <a href="/addOpex/<%= companyId %>/<%= caseId %>">Add Opex</a>
+        </div>
+        <div class="button-card">
+          <a href="/viewSummary/<%= companyId %>/<%= caseId %>">View Summary</a>
         </div>
       </div>
-    </nav>
-    <ul>
-      <li>
-        <a href="/addCapex/<%= companyId %>/<%= caseId %>">Add Capex</a>
-      </li>
-      <li>
-        <a href="/addOpex/<%= companyId %>/<%= caseId %>">Add Opex</a>
-      </li>
-    </ul>
-
-    <!-- Capex Items Table -->
-    <h2>Capex Items</h2>
-    <% if (capex.length > 0) { %>
-    <table>
-      <thead>
-        <tr>
-          <th>Item</th>
-          <th>Rate</th>
-          <th>Quantity</th>
-          <th>Year 1</th>
-          <th>Year 2</th>
-          <th>Year 3</th>
-          <th>Year 4</th>
-          <th>Year 5</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% capex.forEach(function(item) { %>
-        <tr>
-          <td><%= item.item %></td>
-          <td><%= item.rate %></td>
-          <td><%= item.quantity %></td>
-          <td><%= item.rate * item.quantity %></td>
-          <td>0</td>
-          <td>0</td>
-          <td>0</td>
-          <td>0</td>
-        </tr>
-        <% }); %>
-        <tr>
-          <td>Capex Total</td>
-          <td></td>
-          <td></td>
-          <td><%= capexTotal.year1 %></td>
-          <td><%= capexTotal.year2 %></td>
-          <td><%= capexTotal.year3 %></td>
-          <td><%= capexTotal.year4 %></td>
-          <td><%= capexTotal.year5 %></td>
-        </tr>
-      </tbody>
-    </table>
-    <% } %>
-
-    <!-- Opex Items Table -->
-    <h2>Opex Items</h2>
-    <% if (opex.length > 0) { %>
-    <table>
-      <thead>
-        <tr>
-          <th>Item</th>
-          <th>Rate</th>
-          <th>Quantity</th>
-          <th>Payment Year</th>
-          <th>Year 1</th>
-          <th>Year 2</th>
-          <th>Year 3</th>
-          <th>Year 4</th>
-          <th>Year 5</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% opex.forEach(function(item) { %>
-        <tr>
-          <td><%= item.item %></td>
-          <td><%= item.rate %></td>
-          <td><%= item.quantity %></td>
-          <td><%= item.payment_year %></td>
-          <td><%= item.year1 %></td>
-          <td><%= item.year2 %></td>
-          <td><%= item.year3 %></td>
-          <td><%= item.year4 %></td>
-          <td><%= item.year5 %></td>
-        </tr>
-        <% }); %>
-        <tr>
-          <td>Opex Total</td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td><%= opexTotal.year1 %></td>
-          <td><%= opexTotal.year2 %></td>
-          <td><%= opexTotal.year3 %></td>
-          <td><%= opexTotal.year4 %></td>
-          <td><%= opexTotal.year5 %></td>
-        </tr>
-      </tbody>
-    </table>
-    <% } %>
-
-    <!-- Capex + Opex Summary Table -->
-    <h2>Capex + Opex</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>Item</th>
-          <th>Rate</th>
-          <th>Quantity</th>
-          <th>Year 1</th>
-          <th>Year 2</th>
-          <th>Year 3</th>
-          <th>Year 4</th>
-          <th>Year 5</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Capex + Opex</td>
-          <td></td>
-          <td></td>
-          <td><%= capexTotal.year1 + opexTotal.year1 %></td>
-          <td><%= capexTotal.year2 + opexTotal.year2 %></td>
-          <td><%= capexTotal.year3 + opexTotal.year3 %></td>
-          <td><%= capexTotal.year4 + opexTotal.year4 %></td>
-          <td><%= capexTotal.year5 + opexTotal.year5 %></td>
-        </tr>
-      </tbody>
-    </table>
+    </div>
   </body>
 </html>

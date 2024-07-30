@@ -2,21 +2,128 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Add Capex</title>
+    <title>Add Capex for Discrete Solution</title>
     <link rel="stylesheet" href="/styles.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      body {
+        background-color: #f7f9fc;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+      }
+      h1 {
+        margin-bottom: 20px;
+        font-size: 24px;
+        color: #333;
+        text-align: center;
+      }
+      form {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        margin-bottom: 20px;
+        width: 100%;
+        max-width: 900px;
+      }
+      form input,
+      form button {
+        flex: 1 1 1 45%;
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        margin-bottom: 10px;
+      }
+      form button {
+        background-color: #007bff;
+        color: white;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+      form button:hover {
+        background-color: #0056b3;
+      }
+      table {
+        width: 100%;
+        max-width: 600px;
+        border-collapse: collapse;
+        background-color: #fff;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+      }
+      th,
+      td {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid #ccc;
+      }
+      th {
+        background-color: #007bff;
+        color: white;
+      }
+      tbody tr:nth-child(even) {
+        background-color: #f7f9fc;
+      }
+      a {
+        color: #007bff;
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+      a:hover {
+        color: #0056b3;
+      }
+      @media (max-width: 600px) {
+        form input,
+        form button {
+          flex: 1 1 100%;
+        }
+        th,
+        td {
+          font-size: 14px;
+        }
+        table {
+          width: 100%;
+        }
+        th,
+        td {
+          padding: 8px;
+        }
+      }
+      @media (max-width: 400px) {
+        h1 {
+          font-size: 20px;
+        }
+        form {
+          padding: 15px;
+        }
+        form input,
+        form button {
+          padding: 8px;
+          font-size: 14px;
+        }
+        th,
+        td {
+          font-size: 12px;
+        }
+      }
+    </style>
   </head>
   <body>
-    <h1>Add Capex for Company ID: <%= companyId %>, Case ID: <%= caseId %></h1>
-    <nav>
-      <a href="/">Home</a>
-      <a href="/logout">Logout</a>
-      <div class="dropdown">
-        <button class="dropbtn">Account</button>
-        <div class="dropdown-content">
-          <a href="#">User: <%= user.username %></a>
-        </div>
-      </div>
-    </nav>
+    <h1>
+      Add Capex for Discrete Solution for Company: <%= companyName %>, Case: <%=
+      caseName %>
+    </h1>
     <form action="/addCapexDisc/<%= companyId %>/<%= caseId %>" method="POST">
       <input type="text" name="item" placeholder="Item" required />
       <input
@@ -34,7 +141,7 @@
         min="1"
         required
       />
-      <button type="submit">Add Capex</button>
+      <button type="submit">Add Capex Disc</button>
     </form>
     <% if (capex.length > 0) { %>
     <table>
@@ -55,9 +162,9 @@
         <% capex.forEach(function(item) { %>
         <tr>
           <td><%= item.item %></td>
-          <td><%= item.rate %></td>
-          <td><%= item.quantity %></td>
-          <td><%= item.rate * item.quantity %></td>
+          <td><%= Number(item.rate).toLocaleString() %></td>
+          <td><%= Number(item.quantity).toLocaleString() %></td>
+          <td><%= (item.rate * item.quantity).toLocaleString() %></td>
           <td>0</td>
           <td>0</td>
           <td>0</td>
@@ -75,12 +182,12 @@
         </tr>
         <% }); %>
         <tr>
-          <td>Capex Total</td>
+          <td>Capex Disc Total</td>
           <td></td>
           <td></td>
           <td>
             <%= capex.reduce((acc, item) => acc + (item.rate * item.quantity),
-            0) %>
+            0).toLocaleString() %>
           </td>
           <td>0</td>
           <td>0</td>
