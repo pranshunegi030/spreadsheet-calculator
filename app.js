@@ -689,12 +689,12 @@ app.post("/addOpex/:companyId/:caseId", isAuthenticated, (req, res) => {
     year5 = 0;
 
   if (payment_year == 0) {
-    year1 = year2 = year3 = year4 = year5 = (rate * quantity) / 5;
+    year1 = year2 = year3 = year4 = year5 = rate * quantity;
   } else {
-    if (payment_year <= 4) year5 = (rate * quantity) / (5 - payment_year);
-    if (payment_year <= 3) year4 = (rate * quantity) / (5 - payment_year);
-    if (payment_year <= 2) year3 = (rate * quantity) / (5 - payment_year);
-    if (payment_year <= 1) year2 = (rate * quantity) / (5 - payment_year);
+    if (payment_year <= 4) year5 = rate * quantity;
+    if (payment_year <= 3) year4 = rate * quantity;
+    if (payment_year <= 2) year3 = rate * quantity;
+    if (payment_year <= 1) year2 = rate * quantity;
   }
 
   const query = `
@@ -757,12 +757,12 @@ app.post("/editOpex/:id", isAuthenticated, (req, res) => {
     year5 = 0;
 
   if (payment_year == 0) {
-    year1 = year2 = year3 = year4 = year5 = (rate * quantity) / 5;
+    year1 = year2 = year3 = year4 = year5 = rate * quantity;
   } else {
-    if (payment_year <= 4) year5 = (rate * quantity) / (5 - payment_year);
-    if (payment_year <= 3) year4 = (rate * quantity) / (5 - payment_year);
-    if (payment_year <= 2) year3 = (rate * quantity) / (5 - payment_year);
-    if (payment_year <= 1) year2 = (rate * quantity) / (5 - payment_year);
+    if (payment_year <= 4) year5 = rate * quantity;
+    if (payment_year <= 3) year4 = rate * quantity;
+    if (payment_year <= 2) year3 = rate * quantity;
+    if (payment_year <= 1) year2 = rate * quantity;
   }
 
   const query =
@@ -1445,12 +1445,12 @@ app.post("/addOpexDisc/:companyId/:caseId", isAuthenticated, (req, res) => {
     year5 = 0;
 
   if (payment_year == 0) {
-    year1 = year2 = year3 = year4 = year5 = (rate * quantity) / 5;
+    year1 = year2 = year3 = year4 = year5 = rate * quantity;
   } else {
-    if (payment_year <= 4) year5 = (rate * quantity) / (5 - payment_year);
-    if (payment_year <= 3) year4 = (rate * quantity) / (5 - payment_year);
-    if (payment_year <= 2) year3 = (rate * quantity) / (5 - payment_year);
-    if (payment_year <= 1) year2 = (rate * quantity) / (5 - payment_year);
+    if (payment_year <= 4) year5 = rate * quantity;
+    if (payment_year <= 3) year4 = rate * quantity;
+    if (payment_year <= 2) year3 = rate * quantity;
+    if (payment_year <= 1) year2 = rate * quantity;
   }
 
   const query = `
@@ -1513,12 +1513,12 @@ app.post("/editOpexDisc/:id", isAuthenticated, (req, res) => {
     year5 = 0;
 
   if (payment_year == 0) {
-    year1 = year2 = year3 = year4 = year5 = (rate * quantity) / 5;
+    year1 = year2 = year3 = year4 = year5 = rate * quantity;
   } else {
-    if (payment_year <= 4) year5 = (rate * quantity) / (5 - payment_year);
-    if (payment_year <= 3) year4 = (rate * quantity) / (5 - payment_year);
-    if (payment_year <= 2) year3 = (rate * quantity) / (5 - payment_year);
-    if (payment_year <= 1) year2 = (rate * quantity) / (5 - payment_year);
+    if (payment_year <= 4) year5 = rate * quantity;
+    if (payment_year <= 3) year4 = rate * quantity;
+    if (payment_year <= 2) year3 = rate * quantity;
+    if (payment_year <= 1) year2 = rate * quantity;
   }
 
   const query =
